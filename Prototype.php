@@ -12,44 +12,43 @@
 <body>
 
   <?php include("Navbar.php"); ?>
-
+  <?php include("db.php"); ?>
+  <?php
+    $sql = "SELECT * FROM videogames ORDER BY released_date";
+    $results = mysqli_query($mysqli, $sql);
+    if (!$results) { die("Query failed: " . mysqli_error($mysqli)); }
+  ?>
   <div class="container">
 
     <h1>Hello, world!</h1>
 
+    <?php if (mysqli_num_rows($results) == 0): ?>
+      <div class="alert alert-warning">
+        Query worked, but the videogames table has 0 rows, so there are no cards to show.
+      </div>
+    <?php endif; ?>
+
     <div class="row row-cols-2 row-cols-md-4 g-4">
 
-      <?php for ($x = 0; $x <= 12; $x++): ?>
+      <?php while ($a_row = mysqli_fetch_assoc($results)): ?>
 
         <div class="col">
           <div class="card">
             <div class="card-body">
 
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title"><?= $a_row['game_name'] ?></h5>
 
-              <h6 class="card-subtitle mb-2 text-body-secondary">
-                Card subtitle
+              <h6 class="card-subtitle text-body-secondary">
+                <?= $a_row['released_date'] ?>
               </h6>
-
-              <p class="card-text">
-                Some quick example text to build on the card title
-                and make up the bulk of the card's content.
-              </p>
-
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
 
             </div>
           </div>
         </div>
 
-      <?php endfor; ?>
+      <?php endwhile; ?>
 
     </div>
-
-    <?php
-      print("text");
-    ?>
 
   </div>
 
