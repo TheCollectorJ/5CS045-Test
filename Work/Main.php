@@ -15,17 +15,33 @@
   <?php include("db.php"); ?>
 
   <?php
-    $sql = "SELECT * FROM Skylanders ORDER BY Skylander_ID";
-    $results = mysqli_query($mysqli, $sql);
+    $keywords = isset($_POST['keywords']) ? trim($_POST['keywords']) : '';
+
+    if ($keywords !== '') {
+      $like = "%" . $keywords . "%";
+      $stmt = $mysqli->prepare(
+        "SELECT * FROM Skylanders
+         WHERE Skylander_Name LIKE ?
+         ORDER BY Skylander_ID"
+      );
+      $stmt->bind_param("s", $like);
+      $stmt->execute();
+      $results = $stmt->get_result();
+    } else {
+      $results = mysqli_query($mysqli, "SELECT * FROM Skylanders ORDER BY Skylander_ID");
+    }
     if (!$results) { die("Query failed: " . mysqli_error($mysqli)); }
   ?>
 
   <div class="container mt-4">
 
+    <?php if ($keywords !== ''): ?>
+      <p>Results for <strong><?= htmlspecialchars($keywords) ?></strong>
+         (<a href="Main.php">clear</a>)</p>
+    <?php endif; ?>
+
     <?php if (mysqli_num_rows($results) == 0): ?>
-      <div class="alert alert-warning">
-        Query worked, but the Skylanders table has 0 rows, so there are no cards to show.
-      </div>
+      <div class="alert alert-warning">No Skylanders found.</div>
     <?php endif; ?>
 
     <div class="row row-cols-2 row-cols-md-4 g-4">
