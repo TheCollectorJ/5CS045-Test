@@ -58,8 +58,11 @@
 
               <h6 class="card-subtitle mb-3 text-body-secondary">
                 <?= htmlspecialchars($a_row['Game_Name']) ?>
-              </h6>
 
+              </h6>
+               <p class="card-text mb-3">
+                 Varient: <?= !empty($a_row['Ingame_Var']) ? htmlspecialchars($a_row['Ingame_Var']) : 'N/A' ?>
+              </p>
               <a class="btn btn-primary btn-sm"
                  href="Details.php?id=<?= (int) $a_row['Skylander_ID'] ?>">Details</a>
 

@@ -1,7 +1,12 @@
 <?php
-// Read values from the form
-$skylander_name = $_POST['Skylander_Name'];
-$game_name = $_POST['Game_Name'];
+// Read values from the form (?? '' stops "undefined key" warnings)
+$skylander_name = trim($_POST['Skylander_Name'] ?? '');
+$game_name = trim($_POST['Game_Name'] ?? '');
+
+// Stop with a friendly message if either field didn't arrive
+if ($skylander_name === '' || $game_name === '') {
+    die("Both fields are required. <a href=\"Add-Skylander-Form.php\">Go back</a>");
+}
 
 // Connect to database
 include("db.php");
@@ -18,6 +23,6 @@ if (!$stmt->execute()) {
 }
 
 // Redirect to list
-header("location: List_Skylanders.php");
+header("location: Main.php");
 exit();
 ?>
