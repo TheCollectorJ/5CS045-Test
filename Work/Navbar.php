@@ -10,7 +10,7 @@
           <a class="nav-link" href="Main.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="List_Skylanders.php">List</a>
+          <a class="nav-link" href="Edit_Skylander.php">Edit Existing Skylander</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Add-Skylander-Form.php">Add a Skylander</a>

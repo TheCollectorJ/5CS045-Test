@@ -1,4 +1,4 @@
-
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -15,11 +15,8 @@
   <div class="container mt-4">
     <h1>Add a Skylander</h1>
 
-    <?php if ($error !== ""): ?>
-      <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
 
-    <form action="Add-Skylander-Form.php" method="post">
+    <form action="Add-Skylander.php" method="post">
 
       <div class="mb-3">
         <label for="Skylander_Name" class="form-label">Skylander name</label>

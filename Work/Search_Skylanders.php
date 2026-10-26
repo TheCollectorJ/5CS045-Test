@@ -44,4 +44,4 @@ $results = $stmt->get_result();
 <a href="List_Skylanders.php">&lt;&lt; Back to list</a>
 </div>
 </body>
-</html>
+</html> 
